@@ -94,16 +94,45 @@ dense_rank()over (partition by cid
 order by score desc) as ranking from sc 
 
 
+                                                              
 #16.查询学生的总成绩，并进行排名，总分重复时保留名次空缺#
 select sid, sum(score),
 rank()over (order by sum(score) desc) as ranking
 from sc group by sid
 
+                                                    
+                                                              
+#17. 统计各科成绩各分数段人数：课程编号，课程名称，[100-85]，[85-70]，[70-60]，[60-0] 及所占百分比# 
+select sc.cid, any_value(course.cname),
+sum(case when score >=85 and score < 100 then 1 else 0 end) as '[100-85]',
+sum(case when score >=85 and score < 100 then 1 else 0 end)/count(sid) as 'rate[100-85]',
+sum(case when score >=70 and score < 85 then 1 else 0 end) as '[85-70]',
+sum(case when score >=70 and score < 85 then 1 else 0 end)/count(sid) as 'rate[85-70]',
+sum(case when score >=60 and score < 70 then 1 else 0 end) as '[70-60]',
+sum(case when score >=60 and score < 70 then 1 else 0 end)/count(sid) as 'rate[70-60]',
+sum(case when score >=0 and score < 60 then 1 else 0 end) as '[60-0]',
+sum(case when score >=0 and score < 60 then 1 else 0 end)/count(sid) as 'rate[60-0]'
+from sc left join course on course.cid = sc.cid group by cid                                                              
+                                                              
+
+                                                              
+#22. 查询名字中含有「风」字的学生信息#
+select student.* from student
+where student.sname like "%风%"                                                              
+                                                              
+                                                              
+                                                              
+#23查询同名同性学生名单，并统计同名人数#  
+select sname, count(sid) from student
+group by sname having count(sid) > 1                                                              
+                                                              
+                                                              
 
 #24.查询 1990 年年出生的学生名单#
 select student.* from student
-where sage like '1990%'
-
+where sage like '1990%'       
+                                                              
+                                                              
 
 #33.成绩不重复，查询选修「张三」老师所授课程的学生中，成绩最高的学生信息及其成绩#
 select student.*, score from sc
@@ -114,3 +143,25 @@ where teacher.tname = '张三'
 order by score desc limit 1
 
 
+ 
+#37. 统计每门课程的学生选修人数（超过 5 人的课程才统计）。#
+select cid, count(sid) from sc
+group by cid having count(sid) > 5
+                                                              
+                                                              
+
+#38.检索至少选修两门课程的学生学号#
+select sid, count(cid) from sc
+group by sid having count(cid) > 1
+                                                              
+                                                              
+                                                              
+#39.查询选修了全部课程的学生信息#
+select student.sid, any_value(sname), any_value(sage), any_value(ssex)
+from student left join sc
+on student.sid = sc.sid
+group by sid having count(cid) = 3
+                                                              
+                                                              
+                                                              
+                                                              

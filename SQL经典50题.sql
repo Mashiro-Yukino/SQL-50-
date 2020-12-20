@@ -51,8 +51,18 @@ insert into SC values('06' , '03' , 34);
 insert into SC values('07' , '02' , 89);
 insert into SC values('07' , '03' , 98);
 
+                                                              
 
-
+#11.查询两门及其以上不及格课程的同学的学号，姓名及其平均成绩#
+select student.sid, any_value(student.sname),
+avg(score) as avgscore
+from student join sc
+on student.sid = sc.sid where score < 60 
+group by student.sid
+having count(cid) >= 2   
+                                                              
+                                                              
+                                                              
 #12.检索" 01 "课程分数小于 60，按分数降序排列的学生信息#
 SELECT * FROM Student JOIN SC ON Student.SId=SC.SId
 WHERE CId = 01 AND score < 60

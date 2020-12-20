@@ -46,3 +46,22 @@ insert into SC values('06' , '01' , 31);
 insert into SC values('06' , '03' , 34);
 insert into SC values('07' , '02' , 89);
 insert into SC values('07' , '03' , 98);
+
+
+#12.检索" 01 "课程分数小于 60，按分数降序排列的学生信息#
+SELECT * FROM Student JOIN SC ON Student.SId=SC.SId
+WHERE CId = 01 AND score < 60
+ORDER BY score DESC
+
+#15.按各科成绩进行排序，并显示排名， Score 重复时保留名次空缺#
+select sid, cid, score, 
+dense_rank()over (partition by cid
+order by score desc) as ranking from sc 
+
+
+#16.查询学生的总成绩，并进行排名，总分重复时保留名次空缺#
+select sid, sum(score),
+rank()over (order by sum(score) desc) as ranking
+from sc group by sid
+
+

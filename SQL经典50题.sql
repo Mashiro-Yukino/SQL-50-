@@ -142,6 +142,21 @@ left join teacher on teacher.tid = course.tid
 where teacher.tname = '张三' 
 order by score desc limit 1
 
+                                                              
+
+#34.成绩有重复的情况下，查询选修「张三」老师所授课程的学生中，成绩最高的学生
+信息及其成绩#   
+select student.*, score from student left join
+sc on student.sid = sc.sid
+left join course on course.cid = sc.cid
+left join teacher on teacher.tid = course.tid
+where teacher.tname = '张三' and score in
+(select max(score) from sc left join course on course.cid = sc.cid
+left join teacher on teacher.tid = course.tid
+where teacher.tname = '张三'
+)
+                                                              
+                                                              
 
  
 #37. 统计每门课程的学生选修人数（超过 5 人的课程才统计）。#

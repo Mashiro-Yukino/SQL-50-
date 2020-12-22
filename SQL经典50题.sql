@@ -158,6 +158,13 @@ where teacher.tname = '张三'
                                                               
                                                               
 
+#36. 查询每门成绩最好的前两名#
+select a.*, count(b.score) + 1 as ranking from sc a 
+left join sc b on a.cid = b.cid and b.score > a.score
+group by a.cid, a.sid, a.score having ranking <3
+order by a.cid, ranking                                                               
+                                                              
+                                                              
  
 #37. 统计每门课程的学生选修人数（超过 5 人的课程才统计）。#
 select cid, count(sid) from sc

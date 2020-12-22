@@ -116,6 +116,16 @@ from sc left join course on course.cid = sc.cid group by cid
                                                               
 
                                                               
+#18.查询各科成绩前三名的记录#
+select a.*, count(b.score) + 1 as ranking from sc a 
+left join sc b on a.cid = b.cid and b.score > a.score
+group by cid, sid, score having ranking < 4
+order by cid, score desc
+                                                              
+                                                              
+                                                              
+                                                              
+                                                              
 #22. 查询名字中含有「风」字的学生信息#
 select student.* from student
 where student.sname like "%风%"                                                              

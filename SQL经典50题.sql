@@ -140,6 +140,9 @@ group by cid, sid, score having ranking < 4
 order by cid, score desc
                                                               
                                                               
+
+#19.查询每门课程被选修的学生数#
+select cid, count(sid) from sc group by cid                                                              
                                                               
                                                               
                                                               

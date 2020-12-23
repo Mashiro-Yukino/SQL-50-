@@ -53,6 +53,16 @@ insert into SC values('07' , '03' , 98);
 
                                                               
 
+#9.查询和" 01 "号的同学学习的课程完全相同的其他同学的信息#
+select student.sid, any_value(student.sname), any_value(student.sage),
+any_value(student.ssex) from student join sc
+on student.sid = sc.sid where cid in
+(select cid from sc where sid = '01')
+group by sid having count(cid) = 
+(select count(cid) from sc where sid = '01') and sid != '01'                                                              
+                                                              
+                                                              
+                                                              
 #11.查询两门及其以上不及格课程的同学的学号，姓名及其平均成绩#
 select student.sid, any_value(student.sname),
 avg(score) as avgscore

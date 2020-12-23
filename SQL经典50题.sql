@@ -185,6 +185,12 @@ where teacher.tname = '张三'
                                                               
                                                               
 
+#35.查询不同课程成绩相同的学生的学生编号、课程编号、学生成绩#
+select distinct a.* from sc a join sc b
+on a.sid = b.sid where a.score = b.score and a.cid != b.cid                                                              
+                                                              
+                                                                                                                            
+                                                              
 #36. 查询每门成绩最好的前两名#
 select a.*, count(b.score) + 1 as ranking from sc a 
 left join sc b on a.cid = b.cid and b.score > a.score

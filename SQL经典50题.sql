@@ -214,3 +214,8 @@ group by sid having count(cid) = 3
                                                               
                                                               
                                                               
+#40.查询各学生的年龄，只按年份来算#
+select sid,sname, sage, 
+year(now()) - year(sage) as '年龄'
+from student
+                                                              

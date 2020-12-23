@@ -51,6 +51,13 @@ insert into SC values('06' , '03' , 34);
 insert into SC values('07' , '02' , 89);
 insert into SC values('07' , '03' , 98);
 
+
+                                                              
+#8.查询至少有一门课与学号为" 01 "的同学所学相同的同学的信息#                                                              
+select distinct student.* from student join sc
+on student.sid = sc.sid where
+cid in (select cid from sc where sid = '01')                                                              
+                                                              
                                                               
 
 #9.查询和" 01 "号的同学学习的课程完全相同的其他同学的信息#

@@ -232,5 +232,19 @@ from student
      
      
 #42.查询本周过生日的学生#
-select student.* from student where week(now()) = week(sage)     
+select student.* from student where week(now()) = week(sage) 
+                                         
+                                         
+                                         
+                                         
+                                         
+#44.查询本月过生日的学生#   
+SELECT * FROM student where 
+month(now()) = month(sage)
+      
+      
+
+#45.查询下月过生日的学生#
+SELECT * FROM student where 
+month(now())+1 = month(sage)      
                                                               

@@ -227,4 +227,10 @@ group by sid having count(cid) = 3
 select sid,sname, sage, 
 year(now()) - year(sage) as '年龄'
 from student
+     
+     
+     
+     
+#42.查询本周过生日的学生#
+select student.* from student where week(now()) = week(sage)     
                                                               

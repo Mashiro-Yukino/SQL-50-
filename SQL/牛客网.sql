@@ -67,7 +67,40 @@ PRIMARY KEY (`emp_no`,`from_date`));
 
  
              
-SELECT e.emp_no, s.salary 
-FROM employees AS e INNER JOIN salaries AS s 
-ON e.emp_no = s.emp_no AND e.hire_date = s.from_date 
-ORDER BY e.emp_no DESC             
+select employees.emp_no, salaries.salary 
+from employees left join salaries 
+on employees.emp_no = salaries.emp_no
+where employees.hire_date = salaries.from_date
+order by emp_no desc 
+             
+             
+             
+             
+https://www.nowcoder.com/practice/4a052e3e1df5435880d4353eb18a91c6?tpId=82&tags=&title=&diffculty=0&judgeStatus=0&rp=1 
+4.获取所有部门中当前(dept_emp.to_date = '9999-01-01')员工当前(salaries.to_date='9999-01-01')薪水最高的相关信息，
+给出dept_no, emp_no以及其对应的salary，按照部门编号升序排列。
+CREATE TABLE `dept_emp` (
+`emp_no` int(11) NOT NULL,
+`dept_no` char(4) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`dept_no`));
+CREATE TABLE `salaries` (
+`emp_no` int(11) NOT NULL,
+`salary` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`from_date`));
+
+             
+             
+SELECT d1.dept_no, d1.emp_no, s1.salary
+FROM dept_emp as d1 INNER JOIN salaries as s1
+ON d1.emp_no=s1.emp_no AND d1.to_date='9999-01-01'
+AND s1.to_date='9999-01-01'
+WHERE s1.salary in (SELECT MAX(s2.salary)
+FROM dept_emp as d2 INNER JOIN salaries as s2
+ON d2.emp_no=s2.emp_no AND d2.to_date='9999-01-01'
+AND s2.to_date='9999-01-01' AND d2.dept_no = d1.dept_no
+) ORDER BY d1.dept_no;             
+             

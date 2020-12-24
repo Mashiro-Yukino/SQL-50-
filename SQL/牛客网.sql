@@ -38,14 +38,36 @@ CREATE TABLE `dept_manager` (
 PRIMARY KEY (`emp_no`,`dept_no`));             
              
              
-select s.*,d.dept_no
-from salaries as s  inner join dept_manager as d
-on s.emp_no=d.emp_no
-where s.to_date='9999-01-01' and d.to_date='9999-01-01'             
+select salaries.*, dept_manager.dept_no
+from salaries join dept_manager
+on salaries.emp_no = dept_manager.emp_no
+where salaries.to_date='9999-01-01' 
+and dept_manager.to_date='9999-01-01'
              
              
              
+
              
+https://www.nowcoder.com/practice/23142e7a23e4480781a3b978b5e0f33a?tpId=82&tqId=29757&rp=1&ru=%2Fta%2Fsql&qru=%2Fta%2Fsql%2Fquestion-ranking
+3.查找所有员工入职时候的薪水情况，给出emp_no以及salary， 并按照emp_no进行逆序(请注意，一个员工可能有多次涨薪的情况)
+CREATE TABLE `employees` (
+`emp_no` int(11) NOT NULL,
+`birth_date` date NOT NULL,
+`first_name` varchar(14) NOT NULL,
+`last_name` varchar(16) NOT NULL,
+`gender` char(1) NOT NULL,
+`hire_date` date NOT NULL,
+PRIMARY KEY (`emp_no`));
+CREATE TABLE `salaries` (
+`emp_no` int(11) NOT NULL,
+`salary` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`from_date`));
+
+ 
              
-                     
-             
+SELECT e.emp_no, s.salary 
+FROM employees AS e INNER JOIN salaries AS s 
+ON e.emp_no = s.emp_no AND e.hire_date = s.from_date 
+ORDER BY e.emp_no DESC             

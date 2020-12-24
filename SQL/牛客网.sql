@@ -12,9 +12,10 @@ PRIMARY KEY (`emp_no`));
 https://www.nowcoder.com/practice/ec1ca44c62c14ceb990c3c40def1ec6c?tpId=82&&tqId=29754&rp=1&ru=/ta/sql&qru=/ta/sql/question-ranking             
 #1.查找入职员工时间排名倒数第三的员工所有信息，为了减轻入门难度，目前所有的数据里员工入职的日期都不是同一天#  
              
-SELECT * FROM employees
-ORDER BY hire_date DESC
-LIMIT 1 offset 2
+select emp_no, birth_date, first_name,
+last_name, gender, hire_date from employees
+order by hire_date desc
+limit 1 offset 2
 
 #当limit和offset组合使用的时候，limit后面只能有一个参数，
 #表示要取的的数量,offset表示要跳过的数量 。      

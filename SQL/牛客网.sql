@@ -104,3 +104,21 @@ ON d2.emp_no=s2.emp_no AND d2.to_date='9999-01-01'
 AND s2.to_date='9999-01-01' AND d2.dept_no = d1.dept_no
 ) ORDER BY d1.dept_no;             
              
+             
+             
+             
+https://www.nowcoder.com/practice/c59b452f420c47f48d9c86d69efdff20?tpId=82&tags=&title=&diffculty=0&judgeStatus=0&rp=1             
+5.从titles表获取按照title进行分组，每组个数大于等于2，给出title以及对应的数目t。
+注意对于重复的emp_no进行忽略(即emp_no重复的title不计算，title对应的数目t不增加)。
+CREATE TABLE IF NOT EXISTS `titles` (
+`emp_no` int(11) NOT NULL,
+`title` varchar(50) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date DEFAULT NULL);
+             
+             
+SELECT title, COUNT(DISTINCT emp_no) t
+FROM titles
+GROUP BY title
+HAVING t>=2;             
+             

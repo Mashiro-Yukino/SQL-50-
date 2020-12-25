@@ -3,7 +3,7 @@ CREATE TABLE `education` (
 `标题` varchar(100) NOT NULL,
 `信息类别` varchar(100) NOT NULL,
 `发文机构` varchar(100) NOT NULL,
-`内容概述` varchar(100) NOT NULL)
+`内容概述` varchar(100) NOT NULL)character set utf8;
 
 insert into education values('2020/9/30' , ' 国务院学位委员会, 教育部关于印发《专业学位研究生教育发展方案（2020-2025）》的通知' , 
 '高等教育','国务院学位委员会 教育部', '国务院学位委员会、教育部印发《专业学位研究生教育发展方案（2020-2025）》。');

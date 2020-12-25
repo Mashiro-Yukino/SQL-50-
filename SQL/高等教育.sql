@@ -5,6 +5,8 @@ CREATE TABLE `education` (
 `发文机构` varchar(100) NOT NULL,
 `内容概述` varchar(100) NOT NULL)character set utf8;
 
+LOAD DATA  INFILE '研究生教育.csv' INTO TABLE education;
+
 insert into education values('2020/9/30' , ' 国务院学位委员会, 教育部关于印发《专业学位研究生教育发展方案（2020-2025）》的通知' , 
 '高等教育','国务院学位委员会 教育部', '国务院学位委员会、教育部印发《专业学位研究生教育发展方案（2020-2025）》。');
 insert into education values('2020/9/30' , ' 国务院学位委员会关于开展2020年博士硕士学位授权审核工作的通知' , 
